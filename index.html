@@ -6,26 +6,70 @@
 <meta charset="UTF-8">
 <title>Pink Baby - Tích điểm</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-.header {
-    display:flex;
-    align-items:center;
-    gap:10px;
-    justify-content:center;
-    margin-bottom:10px;
+/* Sử dụng font mới cho toàn bộ tiêu đề */
+.title-text {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.header-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 12px 20px;
+    background: #ffffff;
+    border: 2px solid #ff4d4f;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(255, 77, 79, 0.15);
+    margin-bottom: 20px;
 }
 
 .logo {
-    width:50px;
-    height:50px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 1px solid #eee;
 }
 
-.title {
-    font-size:18px;
-    font-weight:bold;
-    color:#ff4d4f;
-    text-align:left;
+.main-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #444;
+    line-height: 1.2;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.brand-name {
+    font-size: 22px;
+    font-weight: 900;
+    color: #ff4d4f;
+    text-shadow: 1px 1px 0px rgba(0,0,0,0.05);
+}
+.sub-title {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #8c8c8c;
+    font-weight: bold;
+}
+
+.main-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: #333;
+    line-height: 1.2;
+}
+
+.brand-name {
+    font-size: 20px;
+    font-weight: 900;
+    color: #ff4d4f; /* Màu thương hiệu */
+    text-transform: uppercase;
 }
 .table thead {
     background:#fafafa;
@@ -71,11 +115,16 @@ button {
 <div class="container">
 
 <div class="box">
-<div class="header">
-    <img src="icon-192.png" class="logo">
-    <div class="title">THEO DÕI ĐIỂM QUÀ<br>PINK BABY</div>
+<div class="header-container">
+    <div class="header-box">
+        <img src="icon-192.png" class="logo">
+        <div class="title-text">
+            <span class="sub-title">HỆ THỐNG</span>
+            <span class="main-title">THEO DÕI ĐIỂM QUÀ</span>
+            <span class="brand-name">PINK BABY</span>
+        </div>
+    </div>
 </div>
-
 <input id="sdt" placeholder="📱 Nhập số điện thoại">
 <button class="btn-blue" onclick="timKhach()">🔍 Tìm / Tạo khách</button>
 
