@@ -27,6 +27,21 @@
         .btn-green { background: #52c41a; }
         .btn-red { background: #ff4d4f; }
         .btn-gray { background: #8c8c8c; margin-top: 15px; font-size: 12px; padding: 8px; }
+        
+        /* Nút Zalo đặc biệt */
+        .btn-zalo { 
+            background: #0068ff; 
+            display: inline-block; 
+            width: auto; 
+            padding: 10px 20px; 
+            text-decoration: none; 
+            color: white; 
+            font-weight: bold; 
+            border-radius: 25px; 
+            font-size: 13px;
+            margin-top: 10px;
+            box-shadow: 0 4px 10px rgba(0, 104, 255, 0.2);
+        }
 
         /* Thông tin & Tổng hợp */
         #info { padding: 10px; background: #fff7f7; border-radius: 8px; text-align: center; font-weight: bold; margin: 10px 0; border: 1px dashed #ff4d4f; }
@@ -47,24 +62,26 @@
         #admin-section, #admin-list-box { display: none; margin-top: 10px; }
         #login-form { display: none; background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #ddd; }
 
-        /* Zalo QR & Cảm ơn (Khu vực Khách hàng) */
+        /* Khu vực Khách hàng */
         #customer-footer { 
             text-align: center; 
             margin-top: 25px; 
             padding-top: 15px;
             border-top: 1px solid #eee;
         }
-        .zalo-box { margin-bottom: 15px; }
+        .zalo-box { margin-bottom: 20px; }
         .zalo-qr { 
-            width: 140px; 
-            height: 140px; 
+            width: 150px; 
+            height: auto; 
             border: 3px solid #ff4d4f; 
             border-radius: 15px; 
             padding: 5px;
             background: #fff;
+            display: inline-block;
+            margin-top: 10px;
         }
-        .zalo-text { font-size: 12px; font-weight: 700; color: #0068ff; margin-bottom: 8px; }
-        .thanks-msg { color: #ff4d4f; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; }
+        .zalo-text { font-size: 12px; font-weight: 700; color: #0068ff; }
+        .thanks-msg { color: #ff4d4f; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-top: 10px; }
     </style>
 </head>
 
@@ -115,8 +132,10 @@
 
         <div id="customer-footer">
             <div class="zalo-box">
-                <div class="zalo-text">💬 QUÉT MÃ VÀO NHÓM ZALO ĐỂ ĐƯỢC HỖ TRỢ</div>
-                <img src="zalopinkbaby.jpg" class="zalo-qr" alt="Zalo QR">
+                <div class="zalo-text">💬 QUÉT MÃ HOẶC BẤM VÀO NÚT DƯỚI ĐỂ VÀO NHÓM HỖ TRỢ</div>
+                <img src="zalopinkbaby.jpg" class="zalo-qr" onerror="this.style.display='none'">
+                <br>
+                <a href="https://zalo.me/g/ksjfny209" target="_blank" class="btn-zalo">👉 THAM GIA NHÓM ZALO</a>
             </div>
             <div class="thanks-msg">
                 🌸 CẢM ƠN KHÁCH HÀNG ĐÃ MUA HÀNG TẠI PINKBABY SHOP 🌸
@@ -145,10 +164,7 @@
     let current = null;
     let isAdmin = false;
 
-    const ADMINS = {
-        "0968003623": "mit101216",
-        "0966767792": "070792"
-    };
+    const ADMINS = { "0968003623": "mit101216", "0966767792": "070792" };
 
     function toggleLogin() {
         let f = document.getElementById("login-form");
@@ -158,12 +174,11 @@
     function checkLogin() {
         let u = document.getElementById("user-admin").value;
         let p = document.getElementById("pass-admin").value;
-        
         if(ADMINS[u] && ADMINS[u] === p) {
             isAdmin = true;
             document.getElementById("admin-section").style.display = "block";
             document.getElementById("admin-list-box").style.display = "block";
-            document.getElementById("customer-footer").style.display = "none"; // Ẩn Zalo & Cảm ơn khi admin đăng nhập
+            document.getElementById("customer-footer").style.display = "none";
             document.getElementById("login-form").style.display = "none";
             document.getElementById("btn-show-login").innerText = "✅ Đã đăng nhập Admin";
             render();
@@ -206,7 +221,7 @@
                 if(!ten) return;
                 data[sdt]={ten, diem:0, history:[]};
             } else {
-                alert("❌ Không tìm thấy thông tin cho SĐT này!"); return;
+                alert("❌ Không tìm thấy thông tin!"); return;
             }
         }
         current = sdt;
