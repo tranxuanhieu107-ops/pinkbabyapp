@@ -4,171 +4,181 @@
     <link rel="icon" href="icon-192.png">
     <link rel="apple-touch-icon" href="icon-192.png">
     <meta charset="UTF-8">
-    <title>Pink Baby - Tích điểm</title>
+    <title>Pink Baby - Trang Chủ</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Montserrat', Arial, sans-serif; background: #f0f2f5; margin: 0; color: #333; }
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background: #fdf2f2; 
+            margin: 0; 
+            color: #333; 
+            -webkit-font-smoothing: antialiased;
+        }
         .container { max-width: 900px; margin: auto; padding: 10px; }
-        .box { background: white; padding: 15px; border-radius: 12px; margin-bottom: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-
-        /* Tiêu đề */
-        .header-box { display: flex; align-items: center; justify-content: center; gap: 15px; padding: 15px; background: #ffffff; border: 2px solid #ff4d4f; border-radius: 15px; box-shadow: 0 4px 12px rgba(255, 77, 79, 0.1); margin-bottom: 20px; }
-        .logo { width: 65px; height: 65px; border-radius: 50%; border: 1px solid #f0f0f0; object-fit: cover; }
-        .title-text { display: flex; flex-direction: column; text-align: left; }
-        .sub-title { font-size: 11px; letter-spacing: 1px; color: #8c8c8c; font-weight: 700; }
-        .main-title { font-size: 15px; font-weight: 800; color: #333; line-height: 1.1; margin: 2px 0; }
-        .brand-name { font-size: 22px; font-weight: 900; color: #ff4d4f; text-transform: uppercase; letter-spacing: 0.5px; }
-
-        /* Form nhập */
-        input, textarea { width: 100%; padding: 12px; margin: 8px 0; border-radius: 8px; border: 1px solid #ddd; box-sizing: border-box; font-family: inherit; }
-        button { width: 100%; padding: 12px; margin: 5px 0; border: none; border-radius: 10px; color: white; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .btn-blue { background: #1890ff; }
-        .btn-green { background: #52c41a; }
-        .btn-red { background: #ff4d4f; }
-        .btn-gray { background: #8c8c8c; margin-top: 15px; font-size: 12px; padding: 8px; }
         
-        /* Nút Zalo đặc biệt */
-        .btn-zalo { 
-            background: #0068ff; 
-            display: inline-block; 
-            width: auto; 
-            padding: 10px 20px; 
-            text-decoration: none; 
+        #main-menu { display: flex; flex-direction: column; align-items: center; padding: 30px 10px; text-align: center; min-height: 95vh; }
+        .main-logo { width: 110px; height: 110px; border-radius: 50%; border: 3px solid #ff4d4f; margin-bottom: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .main-shop-name { font-size: 30px; font-weight: 900; color: #ff4d4f; margin: 0; text-transform: uppercase; letter-spacing: -0.5px; }
+        
+        .blinking-text { font-size: 15px; font-weight: 600; color: #ff7875; margin-bottom: 25px; animation: blink 1.5s infinite; }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+
+        .menu-options { width: 100%; max-width: 360px; }
+        
+        .btn-points-highlight { 
+            background: #ff4d4f; 
             color: white; 
-            font-weight: bold; 
-            border-radius: 25px; 
-            font-size: 13px;
-            margin-top: 10px;
-            box-shadow: 0 4px 10px rgba(0, 104, 255, 0.2);
+            padding: 22px; 
+            font-size: 20px; 
+            font-weight: 900; 
+            font-family: 'Montserrat', sans-serif;
+            border-radius: 20px; 
+            width: 100%; 
+            border: none; 
+            box-shadow: 0 8px 20px rgba(255, 77, 79, 0.3); 
+            cursor: pointer; 
+            margin-bottom: 25px; 
+            text-transform: uppercase;
         }
-
-        /* Thông tin & Tổng hợp */
-        #info { padding: 10px; background: #fff7f7; border-radius: 8px; text-align: center; font-weight: bold; margin: 10px 0; border: 1px dashed #ff4d4f; }
-        .summary-grid { display: none; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
-        .summary-item { padding: 10px; border-radius: 8px; text-align: center; }
-        .buy { background: #e6f7ff; border: 1px solid #91d5ff; }
-        .used { background: #fff1f0; border: 1px solid #ffa39e; }
-        .summary-label { font-size: 10px; font-weight: bold; color: #666; }
-        .summary-value { font-size: 18px; font-weight: 900; }
-
-        /* Bảng */
-        .table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        .table thead { background: #fafafa; font-weight: bold; }
-        .table td { padding: 10px 8px; border-bottom: 1px solid #eee; }
-        .history { max-height: 250px; overflow: auto; font-size: 13px; margin-top: 15px; }
         
-        /* Phần ẩn Admin */
-        #admin-section, #admin-list-box { display: none; margin-top: 10px; }
-        #login-form { display: none; background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #ddd; }
+        .shop-info-card { background: white; padding: 18px; border-radius: 18px; text-align: left; font-size: 14px; line-height: 1.6; margin-bottom: 15px; border: 1px solid #ffe8e8; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+        .info-label { font-weight: 700; color: #ff4d4f; margin-right: 5px; }
+        .info-item { margin-bottom: 8px; display: block; text-decoration: none; color: #333; }
 
-        /* Khu vực Khách hàng */
-        #customer-footer { 
-            text-align: center; 
-            margin-top: 25px; 
-            padding-top: 15px;
-            border-top: 1px solid #eee;
-        }
-        .zalo-box { margin-bottom: 20px; }
-        .zalo-qr { 
-            width: 150px; 
-            height: auto; 
-            border: 3px solid #ff4d4f; 
-            border-radius: 15px; 
-            padding: 5px;
-            background: #fff;
-            display: inline-block;
-            margin-top: 10px;
-        }
-        .zalo-text { font-size: 12px; font-weight: 700; color: #0068ff; }
-        .thanks-msg { color: #ff4d4f; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; margin-top: 10px; }
+        .btn-shop-minimal { color: #888; padding: 10px; font-size: 13px; font-weight: 600; text-decoration: underline; display: inline-block; margin-bottom: 25px; }
+
+        .zalo-box-home { margin-top: 10px; padding: 15px; background: #f0f7ff; border-radius: 20px; }
+        .zalo-qr-home { width: 130px; border: 3px solid #fff; border-radius: 12px; }
+        .btn-zalo-home { background: #0068ff; color: white; text-decoration: none; padding: 10px 20px; border-radius: 25px; font-weight: 700; font-size: 13px; display: inline-block; margin-top: 12px; }
+
+        #points-web { display: none; }
+        .box { background: white; padding: 15px; border-radius: 12px; margin-bottom: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .header-box { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 15px; border: 2px solid #ff4d4f; border-radius: 15px; margin-bottom: 20px; }
+        .logo-small { width: 60px; height: 60px; border-radius: 50%; }
+        
+        input, textarea { width: 100%; padding: 12px; margin: 8px 0; border-radius: 8px; border: 1px solid #ddd; font-family: 'Montserrat', sans-serif; font-size: 15px; box-sizing: border-box; }
+        button { width: 100%; padding: 14px; border: none; border-radius: 10px; color: white; font-size: 16px; font-weight: 700; font-family: 'Montserrat', sans-serif; cursor: pointer; }
+        .btn-blue { background: #1890ff; } .btn-green { background: #52c41a; } .btn-red { background: #ff4d4f; }
+        
+        .summary-grid { display: none; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+        .summary-item { padding: 10px; border-radius: 8px; text-align: center; border: 1px solid #eee; }
+        .table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+        .table td { padding: 10px 6px; border-bottom: 1px solid #eee; line-height: 1.4; }
+        
+        #admin-section, #admin-list-box, #login-form { display: none; }
+        
+        .nav-group { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
+        .btn-nav { background: #f0f0f0; color: #666; padding: 14px; font-size: 15px; border-radius: 10px; text-align: center; font-weight: 700; text-decoration: none; }
+        .btn-logout { background: #fff1f0; color: #ff4d4f; border: 1px solid #ffccc7; font-size: 13px; padding: 10px; margin-top: 10px; }
+        .btn-admin-link { background: none; color: #bbb; font-size: 14px; margin-top: 20px; text-decoration: underline; font-weight: 600; }
     </style>
 </head>
 
 <body>
 <div class="container">
-    <div class="box">
-        <div class="header-box">
-            <img src="icon-192.png" class="logo">
-            <div class="title-text">
-                <span class="sub-title">HỆ THỐNG</span>
-                <span class="main-title">THEO DÕI ĐIỂM QUÀ</span>
-                <span class="brand-name">PINK BABY</span>
+    
+    <div id="main-menu">
+        <img src="icon-192.png" class="main-logo">
+        <h1 class="main-shop-name">PINKBABY SHOP</h1>
+        <div class="blinking-text">✨ Thế giới Mẹ và Bé ✨</div>
+        
+        <div class="menu-options">
+            <button class="btn-points-highlight" onclick="showPoints()">🎁 TRA CỨU ĐIỂM QUÀ</button>
+
+            <div class="shop-info-card">
+                <div class="info-item"><span class="info-label">📍 Địa chỉ:</span> Đối diện cổng trường cấp 2 Thụy Sơn, xã Thụy Anh, tỉnh Hưng Yên.</div>
+                <a href="tel:0966767792" class="info-item"><span class="info-label">📞 Hotline:</span> 0966767792</a>
+                <a href="https://www.facebook.com/shoppinkbaby" target="_blank" class="info-item"><span class="info-label">📘 Facebook:</span> PinkBaby Shop (Hai Coi)</a>
             </div>
-        </div>
 
-        <input id="sdt" type="tel" placeholder="📱 Nhập số điện thoại khách">
-        <button class="btn-blue" onclick="timKhach()">🔍 Xem lịch sử điểm</button>
+            <a href="https://pinkbabyshop.vn" target="_blank" class="btn-shop-minimal">🛍 Xem thêm sản phẩm của Shop</a>
 
-        <div id="info">Chưa chọn khách</div>
-
-        <div id="summary-points" class="summary-grid">
-            <div class="summary-item buy">
-                <div class="summary-label">TỔNG ĐIỂM MUA</div>
-                <div id="total-buy" class="summary-value" style="color: #1890ff;">0</div>
-            </div>
-            <div class="summary-item used">
-                <div class="summary-label">TỔNG ĐÃ DÙNG</div>
-                <div id="total-used" class="summary-value" style="color: #ff4d4f;">0</div>
-            </div>
-        </div>
-
-        <div id="admin-section">
-            <h4 style="margin: 0 0 10px 0; color: #ff4d4f; border-top: 1px solid #eee; padding-top: 15px;">🛠 QUẢN LÝ ĐIỂM</h4>
-            <input id="diem" type="number" placeholder="⭐ Số điểm">
-            <textarea id="note" placeholder="📝 Ghi chú..."></textarea>
-            <button class="btn-green" onclick="cong()">➕ Cộng điểm</button>
-            <button class="btn-red" onclick="tru()">➖ Trừ điểm</button>
-        </div>
-
-        <div class="history">
-            <table class="table">
-                <thead>
-                    <tr><td>⏰ Thời gian</td><td>⭐ Điểm</td><td>📝 Ghi chú</td></tr>
-                </thead>
-                <tbody id="history"></tbody>
-            </table>
-        </div>
-
-        <div id="customer-footer">
-            <div class="zalo-box">
-                <div class="zalo-text">💬 QUÉT MÃ HOẶC BẤM VÀO NÚT DƯỚI ĐỂ VÀO NHÓM HỖ TRỢ</div>
-                <img src="zalopinkbaby.jpg" class="zalo-qr" onerror="this.style.display='none'">
+            <div class="zalo-box-home">
+                <div style="font-size: 12px; font-weight: 800; color: #0068ff; margin-bottom: 12px;">💬 NHÓM ZALO HỖ TRỢ</div>
+                <img src="zalopinkbaby.jpg" class="zalo-qr-home" alt="Zalo QR" onerror="this.style.display='none'">
                 <br>
-                <a href="https://zalo.me/g/ksjfny209" target="_blank" class="btn-zalo">👉 THAM GIA NHÓM ZALO</a>
+                <a href="https://zalo.me/g/ksjfny209" target="_blank" class="btn-zalo-home">THAM GIA NHÓM ZALO</a>
             </div>
-            <div class="thanks-msg">
-                🌸 CẢM ƠN KHÁCH HÀNG ĐÃ MUA HÀNG TẠI PINKBABY SHOP 🌸
-            </div>
-        </div>
-
-        <button id="btn-show-login" class="btn-gray" onclick="toggleLogin()">🔐 Đăng nhập Admin</button>
-
-        <div id="login-form">
-            <input id="user-admin" type="text" placeholder="👤 Tài khoản admin">
-            <input id="pass-admin" type="password" placeholder="🔑 Mật khẩu">
-            <button class="btn-blue" onclick="checkLogin()">Xác nhận Admin</button>
         </div>
     </div>
 
-    <div class="box" id="admin-list-box">
-        <h4 style="margin: 0 0 10px 0; color: #1890ff;">📂 DANH SÁCH KHÁCH HÀNG</h4>
-        <input id="search" placeholder="🔍 Tìm nhanh tên hoặc SĐT..." onkeyup="render()">
-        <table class="table" id="list"></table>
+    <div id="points-web">
+        <div class="box">
+            <div class="header-box">
+                <img src="icon-192.png" class="logo-small">
+                <div style="display: flex; flex-direction: column; text-align: left;">
+                    <span style="font-size: 10px; font-weight: 700; color: #888;">HỆ THỐNG TÍCH ĐIỂM</span>
+                    <span style="font-size: 18px; font-weight: 900; color: #ff4d4f;">PINK BABY SHOP</span>
+                </div>
+            </div>
+
+            <input id="sdt" type="tel" placeholder="📱 Nhập số điện thoại khách">
+            <button class="btn-blue" onclick="timKhach()">🔍 Kiểm tra điểm</button>
+
+            <div id="info" style="padding:10px; background:#fff7f7; border-radius:8px; text-align:center; font-weight:bold; margin:10px 0; border:1px dashed #ff4d4f;">Vui lòng nhập số điện thoại</div>
+
+            <div id="summary-points" class="summary-grid">
+                <div class="summary-item" style="background: #e6f7ff;"><div style="font-size: 10px;">TỔNG MUA</div><div id="total-buy" style="font-size:18px; font-weight:900; color:#1890ff;">0</div></div>
+                <div class="summary-item" style="background: #fff1f0;"><div style="font-size: 10px;">ĐÃ DÙNG</div><div id="total-used" style="font-size:18px; font-weight:900; color:#ff4d4f;">0</div></div>
+            </div>
+
+            <div id="admin-section">
+                <h4 style="color: #ff4d4f; border-top: 1px solid #eee; padding-top: 10px;">🛠 QUẢN LÝ ĐIỂM</h4>
+                <input id="diem" type="number" placeholder="⭐ Số điểm">
+                <textarea id="note" placeholder="📝 Ghi chú..."></textarea>
+                <button class="btn-green" onclick="cong()">➕ Cộng điểm</button>
+                <button class="btn-red" onclick="tru()">➖ Trừ điểm</button>
+            </div>
+
+            <div style="max-height: 300px; overflow: auto; margin-top: 15px; border: 1px solid #f0f0f0;">
+                <table class="table">
+                    <thead><tr style="font-weight:bold; background:#fafafa;"><td>⏰ Thời gian</td><td>⭐</td><td>📝 Ghi chú</td></tr></thead>
+                    <tbody id="history"></tbody>
+                </table>
+            </div>
+
+            <div class="nav-group" id="nav-bottom">
+                <button class="btn-nav" onclick="backToMenu()">⬅ Quay lại trang chính</button>
+                <button id="btn-logout-admin" class="btn-logout" onclick="logoutAdmin()" style="display:none;">🚪 Thoát tài khoản Admin</button>
+                <button id="btn-show-login" class="btn-admin-link" onclick="toggleLogin()">🔐 Admin Login</button>
+            </div>
+
+            <div id="login-form" style="margin-top:15px; padding: 15px; background: #f9f9f9; border-radius: 10px;">
+                <input id="user-admin" type="tel" placeholder="👤 SĐT Admin">
+                <input id="pass-admin" type="password" placeholder="🔑 Mật khẩu">
+                <button class="btn-blue" onclick="checkLogin()">XÁC NHẬN ĐĂNG NHẬP</button>
+            </div>
+        </div>
+
+        <div class="box" id="admin-list-box">
+            <h4 style="color: #1890ff;">📂 QUẢN LÝ KHÁCH HÀNG</h4>
+            <input id="search" placeholder="🔍 Tìm tên hoặc SĐT..." onkeyup="render()">
+            <table class="table" id="list"></table>
+        </div>
     </div>
 </div>
 
 <script>
     const API = "https://script.google.com/macros/s/AKfycbwC5VccD0rItQPxfWdv16RVFaYDM48YLYNs__s03MOnLrN9F8z2XlIxGaTNUyIT0DTuEg/exec";
-    let data = {};
-    let current = null;
-    let isAdmin = false;
-
+    let data = {}; let current = null; let isAdmin = false;
     const ADMINS = { "0968003623": "mit101216", "0966767792": "070792" };
+
+    function showPoints() {
+        document.getElementById("main-menu").style.display = "none";
+        document.getElementById("points-web").style.display = "block";
+        load();
+    }
+    
+    function backToMenu() {
+        document.getElementById("main-menu").style.display = "flex";
+        document.getElementById("points-web").style.display = "none";
+    }
 
     function toggleLogin() {
         let f = document.getElementById("login-form");
         f.style.display = (f.style.display === "block") ? "none" : "block";
+        if(f.style.display === "block") window.scrollTo(0, document.body.scrollHeight);
     }
 
     function checkLogin() {
@@ -178,19 +188,33 @@
             isAdmin = true;
             document.getElementById("admin-section").style.display = "block";
             document.getElementById("admin-list-box").style.display = "block";
-            document.getElementById("customer-footer").style.display = "none";
+            document.getElementById("btn-logout-admin").style.display = "block";
             document.getElementById("login-form").style.display = "none";
-            document.getElementById("btn-show-login").innerText = "✅ Đã đăng nhập Admin";
-            render();
-            alert("Chào Admin!");
-        } else {
-            alert("❌ Sai tài khoản hoặc mật khẩu!");
-        }
+            document.getElementById("btn-show-login").style.display = "none";
+            render(); alert("Chào Admin!");
+        } else { alert("❌ Sai thông tin!"); }
     }
 
-    function formatTime(t){
+    function logoutAdmin() {
+        isAdmin = false;
+        document.getElementById("admin-section").style.display = "none";
+        document.getElementById("admin-list-box").style.display = "none";
+        document.getElementById("btn-logout-admin").style.display = "none";
+        document.getElementById("btn-show-login").style.display = "block";
+        alert("Đã thoát tài khoản admin!");
+        location.reload();
+    }
+
+    // HÀM ĐỊNH DẠNG THỜI GIAN ĐẦY ĐỦ: Giờ:Phút Ngày/Tháng/Năm
+    function formatFullTime(t){
         let d = new Date(t);
-        return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')} - ${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;
+        if(isNaN(d.getTime())) return t; // Nếu không phải định dạng ngày hợp lệ thì trả về nguyên bản
+        let hh = String(d.getHours()).padStart(2,'0');
+        let mm = String(d.getMinutes()).padStart(2,'0');
+        let DD = String(d.getDate()).padStart(2,'0');
+        let MM = String(d.getMonth() + 1).padStart(2,'0');
+        let YYYY = d.getFullYear();
+        return `${hh}:${mm}<br>${DD}/${MM}/${YYYY}`;
     }
 
     function chuanHoa(sdt){
@@ -220,34 +244,22 @@
                 let ten = prompt("Khách mới! Nhập tên:");
                 if(!ten) return;
                 data[sdt]={ten, diem:0, history:[]};
-            } else {
-                alert("❌ Không tìm thấy thông tin!"); return;
-            }
+            } else { alert("❌ Chưa có thông tin khách này!"); return; }
         }
-        current = sdt;
-        hienThi();
+        current = sdt; hienThi();
     }
 
     function hienThi(){
         let kh = data[current];
         document.getElementById("summary-points").style.display = "grid";
-        let tongMua = 0, tongDung = 0;
-        kh.history.forEach(h => {
-            let val = Number(h.change);
-            if (val > 0) tongMua += val; else tongDung += Math.abs(val);
-        });
-        document.getElementById("total-buy").innerText = tongMua;
-        document.getElementById("total-used").innerText = tongDung;
+        let buy = 0, used = 0;
+        kh.history.forEach(h => { if(h.change > 0) buy += Number(h.change); else used += Math.abs(h.change); });
+        document.getElementById("total-buy").innerText = buy;
+        document.getElementById("total-used").innerText = used;
         document.getElementById("info").innerHTML = `👤 ${kh.ten} | ⭐ Hiện có: ${kh.diem}`;
-        
         let html="";
         kh.history.slice().reverse().forEach(h=>{
-            let d = h.change > 0 ? "+"+h.change : h.change;
-            html += `<tr style="background:${h.change<0 ? '#fff1f0' : ''}">
-                <td>${formatTime(h.time)}</td>
-                <td style="color:${h.change<0?'red':'green'}; font-weight:bold">${d}</td>
-                <td>${h.note || ""}</td>
-            </tr>`;
+            html += `<tr><td>${formatFullTime(h.time)}</td><td style="color:${h.change<0?'red':'green'}; font-weight:bold">${h.change > 0 ? '+'+h.change : h.change}</td><td>${h.note || ""}</td></tr>`;
         });
         document.getElementById("history").innerHTML = html;
     }
@@ -284,17 +296,15 @@
         let html="";
         Object.entries(data).forEach(([sdt,kh])=>{
             if(kh.ten.toLowerCase().includes(key) || sdt.includes(key)){
-                html += `<tr onclick="chon('${sdt}')"><td>${kh.ten}</td><td>${sdt}</td><td style="font-weight:bold; color:${kh.diem<0?'red':'green'}">${kh.diem}</td></tr>`;
+                html += `<tr onclick="chon('${sdt}')"><td>${kh.ten}</td><td>${sdt}</td><td style="font-weight:bold; color:green">${kh.diem}</td></tr>`;
             }
         });
         document.getElementById("list").innerHTML = html;
     }
 
     function chon(sdt){
-        current = sdt; document.getElementById("sdt").value = sdt;
-        hienThi(); window.scrollTo({ top: 0, behavior: 'smooth' });
+        current = sdt; document.getElementById("sdt").value = sdt; hienThi();
     }
-    window.onload = load;
 </script>
 </body>
 </html>
