@@ -26,6 +26,7 @@
 
         .menu-options { width: 100%; max-width: 360px; }
         
+        /* NÚT TRA CỨU ĐIỂM */
         .btn-points-highlight { 
             background: #ff4d4f; 
             color: white; 
@@ -38,8 +39,28 @@
             border: none; 
             box-shadow: 0 8px 20px rgba(255, 77, 79, 0.3); 
             cursor: pointer; 
+            margin-bottom: 15px; 
+            text-transform: uppercase;
+        }
+
+        /* NÚT QUAY SỐ MỚI THÊM */
+        .btn-lucky-draw {
+            background: #52c41a; 
+            color: white; 
+            padding: 20px; 
+            font-size: 18px; 
+            font-weight: 900; 
+            font-family: 'Montserrat', sans-serif;
+            border-radius: 20px; 
+            width: 100%; 
+            border: none; 
+            box-shadow: 0 8px 20px rgba(82, 196, 26, 0.3); 
+            cursor: pointer; 
             margin-bottom: 25px; 
             text-transform: uppercase;
+            text-decoration: none;
+            display: inline-block;
+            box-sizing: border-box;
         }
         
         .shop-info-card { background: white; padding: 18px; border-radius: 18px; text-align: left; font-size: 14px; line-height: 1.6; margin-bottom: 15px; border: 1px solid #ffe8e8; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
@@ -85,6 +106,8 @@
         
         <div class="menu-options">
             <button class="btn-points-highlight" onclick="showPoints()">🎁 TRA CỨU ĐIỂM QUÀ</button>
+
+            <a href="https://tranxuanhieu107-ops.github.io/qsmmpinkbaby/" class="btn-lucky-draw">🎰 CHƯƠNG TRÌNH QUAY SỐ</a>
 
             <div class="shop-info-card">
                 <div class="info-item"><span class="info-label">📍 Địa chỉ:</span> Đối diện cổng trường cấp 2 Thụy Sơn, xã Thụy Anh, tỉnh Hưng Yên.</div>
@@ -205,10 +228,9 @@
         location.reload();
     }
 
-    // HÀM ĐỊNH DẠNG THỜI GIAN ĐẦY ĐỦ: Giờ:Phút Ngày/Tháng/Năm
     function formatFullTime(t){
         let d = new Date(t);
-        if(isNaN(d.getTime())) return t; // Nếu không phải định dạng ngày hợp lệ thì trả về nguyên bản
+        if(isNaN(d.getTime())) return t; 
         let hh = String(d.getHours()).padStart(2,'0');
         let mm = String(d.getMinutes()).padStart(2,'0');
         let DD = String(d.getDate()).padStart(2,'0');
