@@ -8,76 +8,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { 
-            font-family: 'Montserrat', Arial, sans-serif; 
-            background: #f0f2f5; 
-            margin: 0; 
-            color: #333;
-        }
+        body { font-family: 'Montserrat', Arial, sans-serif; background: #f0f2f5; margin: 0; color: #333; }
         .container { max-width: 900px; margin: auto; padding: 10px; }
         .box { background: white; padding: 15px; border-radius: 12px; margin-bottom: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
 
-        .header-box {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            padding: 15px;
-            background: #ffffff;
-            border: 2px solid #ff4d4f;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(255, 77, 79, 0.1);
-            margin-bottom: 20px;
-        }
+        /* Tiêu đề */
+        .header-box { display: flex; align-items: center; justify-content: center; gap: 15px; padding: 15px; background: #ffffff; border: 2px solid #ff4d4f; border-radius: 15px; box-shadow: 0 4px 12px rgba(255, 77, 79, 0.1); margin-bottom: 20px; }
         .logo { width: 65px; height: 65px; border-radius: 50%; border: 1px solid #f0f0f0; object-fit: cover; }
         .title-text { display: flex; flex-direction: column; text-align: left; }
         .sub-title { font-size: 11px; letter-spacing: 1px; color: #8c8c8c; font-weight: 700; }
         .main-title { font-size: 15px; font-weight: 800; color: #333; line-height: 1.1; margin: 2px 0; }
         .brand-name { font-size: 22px; font-weight: 900; color: #ff4d4f; text-transform: uppercase; letter-spacing: 0.5px; }
 
-        .table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        .table thead { background: #fafafa; font-weight: bold; }
-        .table td { padding: 10px 8px; border-bottom: 1px solid #eee; }
-        .table tr:hover { background: #f5f5f5; }
-
-        input, textarea {
-            width: 100%; padding: 12px; margin: 8px 0;
-            border-radius: 8px; border: 1px solid #ddd;
-            box-sizing: border-box; font-family: inherit;
-        }
-        button {
-            width: 100%; padding: 12px; margin: 5px 0;
-            border: none; border-radius: 10px;
-            color: white; font-size: 16px; font-weight: bold;
-            cursor: pointer; transition: 0.3s;
-        }
+        /* Form nhập */
+        input, textarea { width: 100%; padding: 12px; margin: 8px 0; border-radius: 8px; border: 1px solid #ddd; box-sizing: border-box; font-family: inherit; }
+        button { width: 100%; padding: 12px; margin: 5px 0; border: none; border-radius: 10px; color: white; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; }
         .btn-blue { background: #1890ff; }
         .btn-green { background: #52c41a; }
         .btn-red { background: #ff4d4f; }
-        
-        #info { 
-            padding: 10px; background: #fff7f7; 
-            border-radius: 8px; text-align: center; 
-            font-weight: bold; margin: 10px 0;
-            border: 1px dashed #ff4d4f;
-        }
-        
-        /* CSS cho khung Tổng điểm mới */
-        .summary-grid {
-            display: none; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 10px; 
-            margin-bottom: 15px;
-        }
+        .btn-gray { background: #8c8c8c; margin-top: 15px; font-size: 12px; padding: 8px; }
+
+        /* Thông tin & Tổng hợp */
+        #info { padding: 10px; background: #fff7f7; border-radius: 8px; text-align: center; font-weight: bold; margin: 10px 0; border: 1px dashed #ff4d4f; }
+        .summary-grid { display: none; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
         .summary-item { padding: 10px; border-radius: 8px; text-align: center; }
         .buy { background: #e6f7ff; border: 1px solid #91d5ff; }
         .used { background: #fff1f0; border: 1px solid #ffa39e; }
-        .summary-label { font-size: 10px; font-weight: bold; color: #666; margin-bottom: 4px; }
+        .summary-label { font-size: 10px; font-weight: bold; color: #666; }
         .summary-value { font-size: 18px; font-weight: 900; }
 
+        /* Bảng */
+        .table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .table thead { background: #fafafa; font-weight: bold; }
+        .table td { padding: 10px 8px; border-bottom: 1px solid #eee; }
         .history { max-height: 250px; overflow: auto; font-size: 13px; margin-top: 15px; }
-        .point { font-weight: bold; color: #52c41a; }
-        .debt { font-weight: bold; color: #ff4d4f; }
+        
+        /* Phần ẩn */
+        #admin-section, #admin-list-box { display: none; margin-top: 10px; }
+        #login-form { display: none; background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #ddd; }
+
+        /* Dòng chữ cảm ơn khách hàng */
+        .thanks-msg { 
+            text-align: center; 
+            color: #ff4d4f; 
+            font-weight: 700; 
+            font-size: 13px; 
+            margin-top: 25px; 
+            padding: 15px;
+            border-top: 1px solid #eee;
+            letter-spacing: 0.5px;
+        }
     </style>
 </head>
 
@@ -93,8 +73,8 @@
             </div>
         </div>
 
-        <input id="sdt" type="tel" placeholder="📱 Nhập số điện thoại">
-        <button class="btn-blue" onclick="timKhach()">🔍 Tìm / Tạo khách</button>
+        <input id="sdt" type="tel" placeholder="📱 Nhập số điện thoại khách">
+        <button class="btn-blue" onclick="timKhach()">🔍 Xem lịch sử điểm</button>
 
         <div id="info">Chưa chọn khách</div>
 
@@ -109,41 +89,82 @@
             </div>
         </div>
 
-        <input id="diem" type="number" placeholder="⭐ Số điểm">
-        <textarea id="note" placeholder="📝 Ghi chú (Ví dụ: Mua bỉm, Đổi gấu bông...)"></textarea>
-
-        <button class="btn-green" onclick="cong()">➕ Cộng điểm</button>
-        <button class="btn-red" onclick="tru()">➖ Trừ điểm</button>
+        <div id="admin-section">
+            <h4 style="margin: 0 0 10px 0; color: #ff4d4f; border-top: 1px solid #eee; padding-top: 15px;">🛠 QUẢN LÝ ĐIỂM</h4>
+            <input id="diem" type="number" placeholder="⭐ Số điểm">
+            <textarea id="note" placeholder="📝 Ghi chú..."></textarea>
+            <button class="btn-green" onclick="cong()">➕ Cộng điểm</button>
+            <button class="btn-red" onclick="tru()">➖ Trừ điểm</button>
+        </div>
 
         <div class="history">
             <table class="table">
                 <thead>
-                    <tr>
-                        <td>⏰ Thời gian</td>
-                        <td>⭐ Điểm</td>
-                        <td>📝 Ghi chú</td>
-                    </tr>
+                    <tr><td>⏰ Thời gian</td><td>⭐ Điểm</td><td>📝 Ghi chú</td></tr>
                 </thead>
                 <tbody id="history"></tbody>
             </table>
         </div>
+
+        <div id="customer-thanks" class="thanks-msg">
+            🌸 CẢM ƠN KHÁCH HÀNG ĐÃ MUA HÀNG TẠI PINKBABY SHOP 🌸
+        </div>
+
+        <button id="btn-show-login" class="btn-gray" onclick="toggleLogin()">🔐 Đăng nhập Admin</button>
+
+        <div id="login-form">
+            <input id="user-admin" type="text" placeholder="👤 Tài khoản admin">
+            <input id="pass-admin" type="password" placeholder="🔑 Mật khẩu">
+            <button class="btn-blue" onclick="checkLogin()">Xác nhận Admin</button>
+        </div>
     </div>
 
-    <div class="box">
+    <div class="box" id="admin-list-box">
+        <h4 style="margin: 0 0 10px 0; color: #1890ff;">📂 DANH SÁCH KHÁCH HÀNG</h4>
         <input id="search" placeholder="🔍 Tìm nhanh tên hoặc SĐT..." onkeyup="render()">
         <table class="table" id="list"></table>
     </div>
 </div>
 
 <script>
+    const API = "https://script.google.com/macros/s/AKfycbwC5VccD0rItQPxfWdv16RVFaYDM48YLYNs__s03MOnLrN9F8z2XlIxGaTNUyIT0DTuEg/exec";
+    let data = {};
+    let current = null;
+    let isAdmin = false;
+
+    // Danh sách Admin
+    const ADMINS = {
+        "0968003623": "mit101216",
+        "0966767792": "070792"
+    };
+
+    function toggleLogin() {
+        let f = document.getElementById("login-form");
+        f.style.display = (f.style.display === "block") ? "none" : "block";
+    }
+
+    function checkLogin() {
+        let u = document.getElementById("user-admin").value;
+        let p = document.getElementById("pass-admin").value;
+        
+        if(ADMINS[u] && ADMINS[u] === p) {
+            isAdmin = true;
+            document.getElementById("admin-section").style.display = "block";
+            document.getElementById("admin-list-box").style.display = "block";
+            document.getElementById("customer-thanks").style.display = "none"; // Ẩn lời cảm ơn khi là admin
+            document.getElementById("login-form").style.display = "none";
+            document.getElementById("btn-show-login").innerText = "✅ Đã đăng nhập Admin";
+            render();
+            alert("Chào Admin!");
+        } else {
+            alert("❌ Sai tài khoản hoặc mật khẩu!");
+        }
+    }
+
     function formatTime(t){
         let d = new Date(t);
         return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')} - ${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;
     }
-
-    const API = "https://script.google.com/macros/s/AKfycbwC5VccD0rItQPxfWdv16RVFaYDM48YLYNs__s03MOnLrN9F8z2XlIxGaTNUyIT0DTuEg/exec";
-    let data = {};
-    let current = null;
 
     function chuanHoa(sdt){
         sdt = String(sdt).replace(/\D/g,"");
@@ -160,18 +181,21 @@
                 data[sdt].diem += Number(r.diem);
                 data[sdt].history.push({ time:r.time, change:r.diem, note:r.note });
             });
-            render();
-        }).catch(()=> alert("❌ Lỗi kết nối dữ liệu"));
+            if(isAdmin) render();
+        });
     }
 
     function timKhach(){
         let sdt = chuanHoa(document.getElementById("sdt").value);
         if(!sdt){ alert("❌ SĐT không hợp lệ"); return; }
-        document.getElementById("sdt").value = sdt;
         if(!data[sdt]){
-            let ten = prompt("Nhập tên khách hàng mới:");
-            if(!ten) return;
-            data[sdt]={ten, diem:0, history:[]};
+            if(isAdmin) {
+                let ten = prompt("Khách mới! Nhập tên:");
+                if(!ten) return;
+                data[sdt]={ten, diem:0, history:[]};
+            } else {
+                alert("❌ Không tìm thấy thông tin cho SĐT này!"); return;
+            }
         }
         current = sdt;
         hienThi();
@@ -180,20 +204,15 @@
     function hienThi(){
         let kh = data[current];
         document.getElementById("summary-points").style.display = "grid";
-
         let tongMua = 0, tongDung = 0;
         kh.history.forEach(h => {
             let val = Number(h.change);
-            if (val > 0) tongMua += val;
-            else tongDung += Math.abs(val);
+            if (val > 0) tongMua += val; else tongDung += Math.abs(val);
         });
-
         document.getElementById("total-buy").innerText = tongMua;
         document.getElementById("total-used").innerText = tongDung;
-
-        let diemText = kh.diem >= 0 ? `⭐ Hiện có: ${kh.diem}` : `⚠️ Nợ: ${Math.abs(kh.diem)} điểm`;
-        document.getElementById("info").innerHTML = `👤 ${kh.ten} | ${diemText}`;
-
+        document.getElementById("info").innerHTML = `👤 ${kh.ten} | ⭐ Hiện có: ${kh.diem}`;
+        
         let html="";
         kh.history.slice().reverse().forEach(h=>{
             let d = h.change > 0 ? "+"+h.change : h.change;
@@ -211,9 +230,10 @@
     }
 
     function cong(){
+        if(!isAdmin) return;
         let d = parseInt(document.getElementById("diem").value);
         let n = document.getElementById("note").value;
-        if(!current || isNaN(d)) { alert("Chọn khách và nhập điểm!"); return; }
+        if(!current || isNaN(d)) return;
         data[current].diem += d;
         data[current].history.push({time:new Date(), change:d, note:n});
         send(d,n); hienThi(); render();
@@ -221,9 +241,10 @@
     }
 
     function tru(){
+        if(!isAdmin) return;
         let d = parseInt(document.getElementById("diem").value);
         let n = document.getElementById("note").value;
-        if(!current || isNaN(d)) { alert("Chọn khách và nhập điểm!"); return; }
+        if(!current || isNaN(d)) return;
         data[current].diem -= d;
         data[current].history.push({time:new Date(), change:-d, note:n});
         send(-d,n); hienThi(); render();
@@ -231,11 +252,12 @@
     }
 
     function render(){
+        if(!isAdmin) return;
         let key = document.getElementById("search").value.toLowerCase();
         let html="";
         Object.entries(data).forEach(([sdt,kh])=>{
             if(kh.ten.toLowerCase().includes(key) || sdt.includes(key)){
-                html += `<tr onclick="chon('${sdt}')"><td>${kh.ten}</td><td>${sdt}</td><td class="${kh.diem<0?'debt':'point'}">${kh.diem}</td></tr>`;
+                html += `<tr onclick="chon('${sdt}')"><td>${kh.ten}</td><td>${sdt}</td><td style="font-weight:bold; color:${kh.diem<0?'red':'green'}">${kh.diem}</td></tr>`;
             }
         });
         document.getElementById("list").innerHTML = html;
