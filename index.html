@@ -43,21 +43,28 @@
         .table td { padding: 10px 8px; border-bottom: 1px solid #eee; }
         .history { max-height: 250px; overflow: auto; font-size: 13px; margin-top: 15px; }
         
-        /* Phần ẩn */
+        /* Phần ẩn Admin */
         #admin-section, #admin-list-box { display: none; margin-top: 10px; }
         #login-form { display: none; background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #ddd; }
 
-        /* Dòng chữ cảm ơn khách hàng */
-        .thanks-msg { 
+        /* Zalo QR & Cảm ơn (Khu vực Khách hàng) */
+        #customer-footer { 
             text-align: center; 
-            color: #ff4d4f; 
-            font-weight: 700; 
-            font-size: 13px; 
             margin-top: 25px; 
-            padding: 15px;
+            padding-top: 15px;
             border-top: 1px solid #eee;
-            letter-spacing: 0.5px;
         }
+        .zalo-box { margin-bottom: 15px; }
+        .zalo-qr { 
+            width: 140px; 
+            height: 140px; 
+            border: 3px solid #ff4d4f; 
+            border-radius: 15px; 
+            padding: 5px;
+            background: #fff;
+        }
+        .zalo-text { font-size: 12px; font-weight: 700; color: #0068ff; margin-bottom: 8px; }
+        .thanks-msg { color: #ff4d4f; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; }
     </style>
 </head>
 
@@ -106,8 +113,14 @@
             </table>
         </div>
 
-        <div id="customer-thanks" class="thanks-msg">
-            🌸 CẢM ƠN KHÁCH HÀNG ĐÃ MUA HÀNG TẠI PINKBABY SHOP 🌸
+        <div id="customer-footer">
+            <div class="zalo-box">
+                <div class="zalo-text">💬 QUÉT MÃ VÀO NHÓM ZALO ĐỂ ĐƯỢC HỖ TRỢ</div>
+                <img src="zalopinkbaby.jpg" class="zalo-qr" alt="Zalo QR">
+            </div>
+            <div class="thanks-msg">
+                🌸 CẢM ƠN KHÁCH HÀNG ĐÃ MUA HÀNG TẠI PINKBABY SHOP 🌸
+            </div>
         </div>
 
         <button id="btn-show-login" class="btn-gray" onclick="toggleLogin()">🔐 Đăng nhập Admin</button>
@@ -132,7 +145,6 @@
     let current = null;
     let isAdmin = false;
 
-    // Danh sách Admin
     const ADMINS = {
         "0968003623": "mit101216",
         "0966767792": "070792"
@@ -151,7 +163,7 @@
             isAdmin = true;
             document.getElementById("admin-section").style.display = "block";
             document.getElementById("admin-list-box").style.display = "block";
-            document.getElementById("customer-thanks").style.display = "none"; // Ẩn lời cảm ơn khi là admin
+            document.getElementById("customer-footer").style.display = "none"; // Ẩn Zalo & Cảm ơn khi admin đăng nhập
             document.getElementById("login-form").style.display = "none";
             document.getElementById("btn-show-login").innerText = "✅ Đã đăng nhập Admin";
             render();
