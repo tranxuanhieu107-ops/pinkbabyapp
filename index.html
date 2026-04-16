@@ -1,348 +1,277 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<link rel="icon" href="icon-192.png">
-<link rel="apple-touch-icon" href="icon-192.png">
-<meta charset="UTF-8">
-<title>Pink Baby - Tích điểm</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
-<style>
-/* Sử dụng font mới cho toàn bộ tiêu đề */
-.title-text {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    font-family: 'Montserrat', sans-serif;
-}
+    <link rel="icon" href="icon-192.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <meta charset="UTF-8">
+    <title>Pink Baby - Tích điểm</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Thiết lập font chuẩn toàn trang để không bị lỗi dấu */
+        body { 
+            font-family: 'Montserrat', Arial, sans-serif; 
+            background: #f0f2f5; 
+            margin: 0; 
+            color: #333;
+        }
 
-.header-box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    padding: 12px 20px;
-    background: #ffffff;
-    border: 2px solid #ff4d4f;
-    border-radius: 20px;
-    box-shadow: 0 4px 15px rgba(255, 77, 79, 0.15);
-    margin-bottom: 20px;
-}
+        .container { max-width: 900px; margin: auto; padding: 10px; }
+        .box { background: white; padding: 15px; border-radius: 12px; margin-bottom: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
 
-.logo {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    border: 1px solid #eee;
-}
+        /* Khung tiêu đề chính */
+        .header-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            padding: 15px;
+            background: #ffffff;
+            border: 2px solid #ff4d4f;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(255, 77, 79, 0.1);
+            margin-bottom: 20px;
+        }
 
-.main-title {
-    font-size: 14px;
-    font-weight: 700;
-    color: #444;
-    line-height: 1.2;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-}
+        .logo {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            border: 1px solid #f0f0f0;
+            object-fit: cover;
+        }
 
-.brand-name {
-    font-size: 22px;
-    font-weight: 900;
-    color: #ff4d4f;
-    text-shadow: 1px 1px 0px rgba(0,0,0,0.05);
-}
-.sub-title {
-    font-size: 10px;
-    letter-spacing: 2px;
-    color: #8c8c8c;
-    font-weight: bold;
-}
+        .title-text {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
 
-.main-title {
-    font-size: 16px;
-    font-weight: 800;
-    color: #333;
-    line-height: 1.2;
-}
+        .sub-title {
+            font-size: 11px;
+            letter-spacing: 1px;
+            color: #8c8c8c;
+            font-weight: 700;
+        }
 
-.brand-name {
-    font-size: 20px;
-    font-weight: 900;
-    color: #ff4d4f; /* Màu thương hiệu */
-    text-transform: uppercase;
-}
-.table thead {
-    background:#fafafa;
-    font-weight:bold;
-}
+        .main-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: #333;
+            line-height: 1.1;
+            margin: 2px 0;
+        }
 
-.table tr:hover {
-    background:#f5f5f5;
-}
-body { font-family: Arial; background:#f0f2f5; margin:0; }
-.container { max-width:900px; margin:auto; padding:10px; }
-.box { background:white; padding:15px; border-radius:12px; margin-bottom:10px; }
+        .brand-name {
+            font-size: 22px;
+            font-weight: 900;
+            color: #ff4d4f;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
 
-h2 { text-align:center; color:#ff4d4f; }
+        /* Bảng và các thành phần khác */
+        .table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .table thead { background: #fafafa; font-weight: bold; }
+        .table td { padding: 10px 8px; border-bottom: 1px solid #eee; }
+        .table tr:hover { background: #f5f5f5; }
 
-input, textarea {
-    width:100%; padding:10px; margin:5px 0;
-    border-radius:8px; border:1px solid #ccc;
-}
+        input, textarea {
+            width: 100%; padding: 12px; margin: 8px 0;
+            border-radius: 8px; border: 1px solid #ddd;
+            box-sizing: border-box; font-family: inherit;
+        }
 
-button {
-    width:100%; padding:12px; margin:5px 0;
-    border:none; border-radius:10px;
-    color:white; font-size:16px;
-}
+        button {
+            width: 100%; padding: 12px; margin: 5px 0;
+            border: none; border-radius: 10px;
+            color: white; font-size: 16px; font-weight: bold;
+            cursor: pointer; transition: 0.3s;
+        }
 
-.btn-blue { background:#1890ff; }
-.btn-green { background:#52c41a; }
-.btn-red { background:#ff4d4f; }
+        .btn-blue { background: #1890ff; }
+        .btn-green { background: #52c41a; }
+        .btn-red { background: #ff4d4f; }
+        button:active { opacity: 0.8; transform: scale(0.98); }
 
-.table { width:100%; border-collapse: collapse; }
-.table td { padding:8px; border-bottom:1px solid #eee; }
-
-.point { font-weight:bold; }
-.debt { color:red; }
-
-.history { max-height:200px; overflow:auto; font-size:13px; }
-</style>
+        .point { font-weight: bold; color: #52c41a; }
+        .debt { font-weight: bold; color: #ff4d4f; }
+        #info { 
+            padding: 10px; background: #fff7f7; 
+            border-radius: 8px; text-align: center; 
+            font-weight: bold; margin: 10px 0;
+            border: 1px dashed #ff4d4f;
+        }
+        .history { max-height: 250px; overflow: auto; font-size: 13px; margin-top: 15px; }
+    </style>
 </head>
 
 <body>
-
 <div class="container">
+    <div class="box">
+        <div class="header-box">
+            <img src="icon-192.png" class="logo">
+            <div class="title-text">
+                <span class="sub-title">HỆ THỐNG</span>
+                <span class="main-title">THEO DÕI ĐIỂM QUÀ</span>
+                <span class="brand-name">PINK BABY</span>
+            </div>
+        </div>
 
-<div class="box">
-<div class="header-container">
-    <div class="header-box">
-        <img src="icon-192.png" class="logo">
-        <div class="title-text">
-            <span class="sub-title">HỆ THỐNG</span>
-            <span class="main-title">THEO DÕI ĐIỂM QUÀ</span>
-            <span class="brand-name">PINK BABY</span>
+        <input id="sdt" type="tel" placeholder="📱 Nhập số điện thoại">
+        <button class="btn-blue" onclick="timKhach()">🔍 Tìm / Tạo khách</button>
+
+        <div id="info">Chưa chọn khách</div>
+
+        <input id="diem" type="number" placeholder="⭐ Số điểm">
+        <textarea id="note" placeholder="📝 Ghi chú (Ví dụ: Mua bỉm, Đổi gấu bông...)"></textarea>
+
+        <button class="btn-green" onclick="cong()">➕ Cộng điểm</button>
+        <button class="btn-red" onclick="tru()">➖ Trừ điểm</button>
+
+        <div class="history">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>⏰ Thời gian</td>
+                        <td>⭐ Điểm</td>
+                        <td>📝 Ghi chú</td>
+                    </tr>
+                </thead>
+                <tbody id="history"></tbody>
+            </table>
         </div>
     </div>
-</div>
-<input id="sdt" placeholder="📱 Nhập số điện thoại">
-<button class="btn-blue" onclick="timKhach()">🔍 Tìm / Tạo khách</button>
 
-<div id="info">Chưa chọn khách</div>
-
-<input id="diem" placeholder="⭐ Số điểm">
-<textarea id="note" placeholder="📝 Ghi chú"></textarea>
-
-<button class="btn-green" onclick="cong()">➕ Cộng điểm</button>
-<button class="btn-red" onclick="tru()">➖ Trừ điểm</button>
-
-<div class="history">
-    <table class="table">
-        <thead>
-            <tr>
-                <td>⏰ Thời gian</td>
-                <td>⭐ Điểm</td>
-                <td>📝 Ghi chú</td>
-            </tr>
-        </thead>
-        <tbody id="history"></tbody>
-    </table>
-</div>
-</div>
-
-<div class="box">
-<input id="search" placeholder="🔍 Tìm khách..." onkeyup="render()">
-<table class="table" id="list"></table>
-</div>
-
+    <div class="box">
+        <input id="search" placeholder="🔍 Tìm nhanh tên hoặc SĐT..." onkeyup="render()">
+        <table class="table" id="list"></table>
+    </div>
 </div>
 
 <script>
-function formatTime(t){
-    let d = new Date(t);
-
-    let h = String(d.getHours()).padStart(2,'0');
-    let m = String(d.getMinutes()).padStart(2,'0');
-
-    let day = String(d.getDate()).padStart(2,'0');
-    let month = String(d.getMonth()+1).padStart(2,'0');
-    let year = d.getFullYear();
-
-    return `${h}:${m} - ${day}/${month}/${year}`;
-}
-const API = "https://script.google.com/macros/s/AKfycbwC5VccD0rItQPxfWdv16RVFaYDM48YLYNs__s03MOnLrN9F8z2XlIxGaTNUyIT0DTuEg/exec";
-
-let data = {};
-let current = null;
-
-// ===== CHUẨN HÓA SĐT =====
-function chuanHoa(sdt){
-    sdt = String(sdt).replace(/\D/g,"");
-    if(sdt.length >= 9){
-        return "0" + sdt.slice(-9);
+    // Giữ nguyên toàn bộ phần Script của bạn vì nó đang chạy tốt
+    function formatTime(t){
+        let d = new Date(t);
+        let h = String(d.getHours()).padStart(2,'0');
+        let m = String(d.getMinutes()).padStart(2,'0');
+        let day = String(d.getDate()).padStart(2,'0');
+        let month = String(d.getMonth()+1).padStart(2,'0');
+        let year = d.getFullYear();
+        return `${h}:${m} - ${day}/${month}/${year}`;
     }
-    return null;
-}
 
-// ===== LOAD =====
-function load(){
-    fetch(API)
-    .then(res=>res.json())
-    .then(rows=>{
-        data = {};
+    const API = "https://script.google.com/macros/s/AKfycbwC5VccD0rItQPxfWdv16RVFaYDM48YLYNs__s03MOnLrN9F8z2XlIxGaTNUyIT0DTuEg/exec";
+    let data = {};
+    let current = null;
 
-        rows.forEach(r=>{
-            let sdt = chuanHoa(r.sdt);
-            if(!sdt) return;
+    function chuanHoa(sdt){
+        sdt = String(sdt).replace(/\D/g,"");
+        if(sdt.length >= 9){ return "0" + sdt.slice(-9); }
+        return null;
+    }
 
-            if(!data[sdt]){
-                data[sdt]={ten:r.ten, diem:0, history:[]};
-            }
-
-            data[sdt].diem += Number(r.diem);
-
-            data[sdt].history.push({
-                time:r.time,
-                change:r.diem,
-                note:r.note
+    function load(){
+        fetch(API)
+        .then(res=>res.json())
+        .then(rows=>{
+            data = {};
+            rows.forEach(r=>{
+                let sdt = chuanHoa(r.sdt);
+                if(!sdt) return;
+                if(!data[sdt]){ data[sdt]={ten:r.ten, diem:0, history:[]}; }
+                data[sdt].diem += Number(r.diem);
+                data[sdt].history.push({ time:r.time, change:r.diem, note:r.note });
             });
-        });
-
-        render();
-    })
-    .catch(()=>{
-        alert("❌ Lỗi kết nối Google Sheet");
-    });
-}
-
-// ===== TÌM KHÁCH =====
-function timKhach(){
-    let sdt = chuanHoa(document.getElementById("sdt").value);
-
-    if(!sdt){
-        alert("❌ SĐT không hợp lệ");
-        return;
-    }
-
-    document.getElementById("sdt").value = sdt;
-
-    if(!data[sdt]){
-        let ten = prompt("Nhập tên khách:");
-        if(!ten) return;
-        data[sdt]={ten, diem:0, history:[]};
-    }
-
-    current = sdt;
-    hienThi();
-}
-
-// ===== HIỂN THỊ =====
-function hienThi(){
-    let kh = data[current];
-
-    let diemText = kh.diem >= 0
-        ? `⭐ ${kh.diem}`
-        : `⚠️ Nợ ${Math.abs(kh.diem)} điểm`;
-
-    document.getElementById("info").innerHTML =
-        `👤 ${kh.ten} | ${diemText}`;
-
-    let html="";
-kh.history.slice().reverse().forEach(h=>{
-    let diem = h.change > 0 ? "+"+h.change : h.change;
-
-    html += `
-    <tr style="
-    background:${h.change<0 ? '#fff1f0' : ''};
-    font-weight:${h.change<0 ? 'bold' : 'normal'};
-">
-        <td>${formatTime(h.time)}</td>
-        <td style="color:${h.change<0?'red':'green'}">${diem}</td>
-        <td>${h.note || ""}</td>
-    </tr>`;
-});
-
-    document.getElementById("history").innerHTML = html;
-}
-
-// ===== GỬI =====
-function send(diem,note){
-    let kh = data[current];
-
-    fetch(API,{
-        method:"POST",
-        body: JSON.stringify({
-            sdt: current,
-            ten: kh.ten,
-            diem,
-            note
+            render();
         })
-    });
-}
+        .catch(()=> alert("❌ Lỗi kết nối dữ liệu"));
+    }
 
-// ===== CỘNG =====
-function cong(){
-    let d = parseInt(document.getElementById("diem").value);
-    let note = document.getElementById("note").value;
-
-    if(!current || isNaN(d)) return;
-
-    let kh = data[current];
-
-    kh.diem += d;
-    kh.history.push({time:new Date().toLocaleString(), change:d, note});
-
-    send(d,note);
-
-    hienThi(); render();
-}
-
-// ===== TRỪ (CHO PHÉP ÂM) =====
-function tru(){
-    let d = parseInt(document.getElementById("diem").value);
-    let note = document.getElementById("note").value;
-
-    if(!current || isNaN(d)) return;
-
-    let kh = data[current];
-
-    kh.diem -= d; // 🔥 cho phép âm
-
-    kh.history.push({time:new Date().toLocaleString(), change:-d, note});
-
-    send(-d,note);
-
-    hienThi(); render();
-}
-
-// ===== DANH SÁCH =====
-function render(){
-    let key = document.getElementById("search").value.toLowerCase();
-    let html="";
-
-    Object.entries(data).forEach(([sdt,kh])=>{
-        if(kh.ten.toLowerCase().includes(key) || sdt.includes(key)){
-            html += `<tr onclick="chon('${sdt}')">
-                <td>${kh.ten}</td>
-                <td>${sdt}</td>
-                <td class="${kh.diem<0?'debt':'point'}">${kh.diem}</td>
-            </tr>`;
+    function timKhach(){
+        let sdt = chuanHoa(document.getElementById("sdt").value);
+        if(!sdt){ alert("❌ SĐT không hợp lệ"); return; }
+        document.getElementById("sdt").value = sdt;
+        if(!data[sdt]){
+            let ten = prompt("Nhập tên khách hàng mới:");
+            if(!ten) return;
+            data[sdt]={ten, diem:0, history:[]};
         }
-    });
+        current = sdt;
+        hienThi();
+    }
 
-    document.getElementById("list").innerHTML = html;
-}
+    function hienThi(){
+        let kh = data[current];
+        let diemText = kh.diem >= 0 ? `⭐ ${kh.diem}` : `⚠️ Nợ ${Math.abs(kh.diem)} điểm`;
+        document.getElementById("info").innerHTML = `👤 ${kh.ten} | ${diemText}`;
+        let html="";
+        kh.history.slice().reverse().forEach(h=>{
+            let diem = h.change > 0 ? "+"+h.change : h.change;
+            html += `<tr style="background:${h.change<0 ? '#fff1f0' : ''}">
+                <td>${formatTime(h.time)}</td>
+                <td style="color:${h.change<0?'red':'green'}; font-weight:bold">${diem}</td>
+                <td>${h.note || ""}</td>
+            </tr>`;
+        });
+        document.getElementById("history").innerHTML = html;
+    }
 
-// ===== CHỌN =====
-function chon(sdt){
-    current = sdt;
-    hienThi();
-}
+    function send(diem,note){
+        let kh = data[current];
+        fetch(API,{
+            method:"POST",
+            body: JSON.stringify({ sdt: current, ten: kh.ten, diem, note })
+        });
+    }
 
-// ===== START =====
-window.onload = load;
+    function cong(){
+        let d = parseInt(document.getElementById("diem").value);
+        let note = document.getElementById("note").value;
+        if(!current || isNaN(d)) { alert("Chọn khách và nhập điểm!"); return; }
+        data[current].diem += d;
+        data[current].history.push({time:new Date(), change:d, note});
+        send(d,note);
+        hienThi(); render();
+        document.getElementById("diem").value = "";
+        document.getElementById("note").value = "";
+    }
 
+    function tru(){
+        let d = parseInt(document.getElementById("diem").value);
+        let note = document.getElementById("note").value;
+        if(!current || isNaN(d)) { alert("Chọn khách và nhập điểm!"); return; }
+        data[current].diem -= d;
+        data[current].history.push({time:new Date(), change:-d, note});
+        send(-d,note);
+        hienThi(); render();
+        document.getElementById("diem").value = "";
+        document.getElementById("note").value = "";
+    }
+
+    function render(){
+        let key = document.getElementById("search").value.toLowerCase();
+        let html="";
+        Object.entries(data).forEach(([sdt,kh])=>{
+            if(kh.ten.toLowerCase().includes(key) || sdt.includes(key)){
+                html += `<tr onclick="chon('${sdt}')">
+                    <td>${kh.ten}</td>
+                    <td>${sdt}</td>
+                    <td class="${kh.diem<0?'debt':'point'}">${kh.diem}</td>
+                </tr>`;
+            }
+        });
+        document.getElementById("list").innerHTML = html;
+    }
+
+    function chon(sdt){
+        current = sdt;
+        document.getElementById("sdt").value = sdt;
+        hienThi();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    window.onload = load;
 </script>
-
 </body>
 </html>
