@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta charset="UTF-8">
+<title>Pink Baby - Tích điểm</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+.header {
+    display:flex;
+    align-items:center;
+    gap:10px;
+    justify-content:center;
+    margin-bottom:10px;
+}
+
+.logo {
+    width:50px;
+    height:50px;
+}
+
+.title {
+    font-size:18px;
+    font-weight:bold;
+    color:#ff4d4f;
+    text-align:left;
+}
+.table thead {
+    background:#fafafa;
+    font-weight:bold;
+}
+
+.table tr:hover {
+    background:#f5f5f5;
+}
+body { font-family: Arial; background:#f0f2f5; margin:0; }
+.container { max-width:900px; margin:auto; padding:10px; }
+.box { background:white; padding:15px; border-radius:12px; margin-bottom:10px; }
+
+h2 { text-align:center; color:#ff4d4f; }
+
+input, textarea {
+    width:100%; padding:10px; margin:5px 0;
+    border-radius:8px; border:1px solid #ccc;
+}
+
+button {
+    width:100%; padding:12px; margin:5px 0;
+    border:none; border-radius:10px;
+    color:white; font-size:16px;
+}
+
+.btn-blue { background:#1890ff; }
+.btn-green { background:#52c41a; }
+.btn-red { background:#ff4d4f; }
+
+.table { width:100%; border-collapse: collapse; }
+.table td { padding:8px; border-bottom:1px solid #eee; }
+
+.point { font-weight:bold; }
+.debt { color:red; }
+
+.history { max-height:200px; overflow:auto; font-size:13px; }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="box">
+<div class="header">
+    <img src="icon-192.png" class="logo">
+    <div class="title">THEO DÕI ĐIỂM QUÀ<br>PINK BABY</div>
+</div>
+
+<input id="sdt" placeholder="📱 Nhập số điện thoại">
+<button class="btn-blue" onclick="timKhach()">🔍 Tìm / Tạo khách</button>
+
+<div id="info">Chưa chọn khách</div>
+
+<input id="diem" placeholder="⭐ Số điểm">
+<textarea id="note" placeholder="📝 Ghi chú"></textarea>
+
+<button class="btn-green" onclick="cong()">➕ Cộng điểm</button>
+<button class="btn-red" onclick="tru()">➖ Trừ điểm</button>
+
+<div class="history">
+    <table class="table">
+        <thead>
+            <tr>
+                <td>⏰ Thời gian</td>
+                <td>⭐ Điểm</td>
+                <td>📝 Ghi chú</td>
+            </tr>
+        </thead>
+        <tbody id="history"></tbody>
+    </table>
+</div>
+</div>
+
+<div class="box">
+<input id="search" placeholder="🔍 Tìm khách..." onkeyup="render()">
+<table class="table" id="list"></table>
+</div>
+
+</div>
+
+<script>
+function formatTime(t){
+    let d = new Date(t);
+
+    let h = String(d.getHours()).padStart(2,'0');
+    let m = String(d.getMinutes()).padStart(2,'0');
+
+    let day = String(d.getDate()).padStart(2,'0');
+    let month = String(d.getMonth()+1).padStart(2,'0');
+    let year = d.getFullYear();
+
+    return `${h}:${m} - ${day}/${month}/${year}`;
+}
+const API = "https://script.google.com/macros/s/AKfycbwC5VccD0rItQPxfWdv16RVFaYDM48YLYNs__s03MOnLrN9F8z2XlIxGaTNUyIT0DTuEg/exec";
+
+let data = {};
+let current = null;
+
+// ===== CHUẨN HÓA SĐT =====
+function chuanHoa(sdt){
+    sdt = String(sdt).replace(/\D/g,"");
+    if(sdt.length >= 9){
+        return "0" + sdt.slice(-9);
+    }
+    return null;
+}
+
+// ===== LOAD =====
+function load(){
+    fetch(API)
+    .then(res=>res.json())
+    .then(rows=>{
+        data = {};
+
+        rows.forEach(r=>{
+            let sdt = chuanHoa(r.sdt);
+            if(!sdt) return;
+
+            if(!data[sdt]){
+                data[sdt]={ten:r.ten, diem:0, history:[]};
+            }
+
+            data[sdt].diem += Number(r.diem);
+
+            data[sdt].history.push({
+                time:r.time,
+                change:r.diem,
+                note:r.note
+            });
+        });
+
+        render();
+    })
+    .catch(()=>{
+        alert("❌ Lỗi kết nối Google Sheet");
+    });
+}
+
+// ===== TÌM KHÁCH =====
+function timKhach(){
+    let sdt = chuanHoa(document.getElementById("sdt").value);
+
+    if(!sdt){
+        alert("❌ SĐT không hợp lệ");
+        return;
+    }
+
+    document.getElementById("sdt").value = sdt;
+
+    if(!data[sdt]){
+        let ten = prompt("Nhập tên khách:");
+        if(!ten) return;
+        data[sdt]={ten, diem:0, history:[]};
+    }
+
+    current = sdt;
+    hienThi();
+}
+
+// ===== HIỂN THỊ =====
+function hienThi(){
+    let kh = data[current];
+
+    let diemText = kh.diem >= 0
+        ? `⭐ ${kh.diem}`
+        : `⚠️ Nợ ${Math.abs(kh.diem)} điểm`;
+
+    document.getElementById("info").innerHTML =
+        `👤 ${kh.ten} | ${diemText}`;
+
+    let html="";
+kh.history.slice().reverse().forEach(h=>{
+    let diem = h.change > 0 ? "+"+h.change : h.change;
+
+    html += `
+    <tr style="
+    background:${h.change<0 ? '#fff1f0' : ''};
+    font-weight:${h.change<0 ? 'bold' : 'normal'};
+">
+        <td>${formatTime(h.time)}</td>
+        <td style="color:${h.change<0?'red':'green'}">${diem}</td>
+        <td>${h.note || ""}</td>
+    </tr>`;
+});
+
+    document.getElementById("history").innerHTML = html;
+}
+
+// ===== GỬI =====
+function send(diem,note){
+    let kh = data[current];
+
+    fetch(API,{
+        method:"POST",
+        body: JSON.stringify({
+            sdt: current,
+            ten: kh.ten,
+            diem,
+            note
+        })
+    });
+}
+
+// ===== CỘNG =====
+function cong(){
+    let d = parseInt(document.getElementById("diem").value);
+    let note = document.getElementById("note").value;
+
+    if(!current || isNaN(d)) return;
+
+    let kh = data[current];
+
+    kh.diem += d;
+    kh.history.push({time:new Date().toLocaleString(), change:d, note});
+
+    send(d,note);
+
+    hienThi(); render();
+}
+
+// ===== TRỪ (CHO PHÉP ÂM) =====
+function tru(){
+    let d = parseInt(document.getElementById("diem").value);
+    let note = document.getElementById("note").value;
+
+    if(!current || isNaN(d)) return;
+
+    let kh = data[current];
+
+    kh.diem -= d; // 🔥 cho phép âm
+
+    kh.history.push({time:new Date().toLocaleString(), change:-d, note});
+
+    send(-d,note);
+
+    hienThi(); render();
+}
+
+// ===== DANH SÁCH =====
+function render(){
+    let key = document.getElementById("search").value.toLowerCase();
+    let html="";
+
+    Object.entries(data).forEach(([sdt,kh])=>{
+        if(kh.ten.toLowerCase().includes(key) || sdt.includes(key)){
+            html += `<tr onclick="chon('${sdt}')">
+                <td>${kh.ten}</td>
+                <td>${sdt}</td>
+                <td class="${kh.diem<0?'debt':'point'}">${kh.diem}</td>
+            </tr>`;
+        }
+    });
+
+    document.getElementById("list").innerHTML = html;
+}
+
+// ===== CHỌN =====
+function chon(sdt){
+    current = sdt;
+    hienThi();
+}
+
+// ===== START =====
+window.onload = load;
+
+</script>
+
+</body>
+</html>
